@@ -25,10 +25,11 @@ class Signup extends React.Component {
   handleSubmit = (event, signupUser) => {
     event.preventDefault();
     signupUser()
-      .then(data => {
-        console.log(data);
-        this.clearState();
-      })
+    .then(({ data }) => {
+      console.log(data);
+      localStorage.setItem('token', data.signupUser.token);
+      this.clearState();
+    })
   }
 
   validateForm = () => {
@@ -89,7 +90,7 @@ class Signup extends React.Component {
                   className="button-primary"
                   disabled={loading || this.validateForm()}
                 >
-                  Submit
+                  Register
                 </button>
                 {error && <Error error={error} />}
               </form>
