@@ -20,12 +20,13 @@ type User {
   favourites: [Recipe]
 }
 
-type Query {
-  getAllRecipes: [Recipe]
-}
-
 type Token {
   token: String!
+}
+
+type Query {
+  getAllRecipes: [Recipe]
+  getCurrentUser: User
 }
 
 type Mutation {
