@@ -2,21 +2,50 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const createToken = (user, secret, expiresIn) => {
-  const { username, email } = user;
-  return jwt.sign({username, email}, secret, { expiresIn })
+  const {
+    username,
+    email
+  } = user;
+  return jwt.sign({
+    username,
+    email
+  }, secret, {
+    expiresIn
+  })
 }
 
 exports.resolvers = {
   Query: {
-    getAllRecipes: async (root, args, { Recipe } ) => {
-      return await Recipe.find();
+    getAllRecipes: async (root, args, {
+      Recipe
+    }) => {
+      const allRecipes = await Recipe.find().sort({
+        createDate: "desc"
+      });
+      return allRecipes;
     },
 
-    getCurrentUser: async (root, args, { currentUser, User}) => {
+    getRecipe: async (root, {
+      _id
+    }, {
+      Recipe
+    }) => {
+      const recipe = await Recipe.findOne({
+        _id
+      });
+      return recipe;
+    },
+
+    getCurrentUser: async (root, args, {
+      currentUser,
+      User
+    }) => {
       if (!currentUser) {
         return null;
       }
-      const user = await User.findOne({ username: currentUser.username })
+      const user = await User.findOne({
+          username: currentUser.username
+        })
         .populate({
           path: 'favorites',
           model: 'Recipe'
@@ -25,27 +54,38 @@ exports.resolvers = {
     }
   },
   Mutation: {
-    addRecipe: async(
-      root,
-      { name, description, category, instructions, username },
-      { Recipe }
+    addRecipe: async (
+      root, {
+        name,
+        description,
+        category,
+        instructions,
+        username
+      }, {
+        Recipe
+      }
     ) => {
       const newRecipe = await new Recipe({
         name,
         description,
         category,
         instructions,
-        username 
+        username
       }).save();
       return newRecipe;
     },
 
-    signinUser: async(
-      root,
-      { username, password },
-      { User }
+    signinUser: async (
+      root, {
+        username,
+        password
+      }, {
+        User
+      }
     ) => {
-      const user = await User.findOne({ username});
+      const user = await User.findOne({
+        username
+      });
       if (!user) {
         throw new Error('User not found');
       }
@@ -53,15 +93,23 @@ exports.resolvers = {
       if (!isValidPassword) {
         throw new Error('Invalid password');
       }
-      return { token: createToken(user, process.env.SECRET, '1hr')};
+      return {
+        token: createToken(user, process.env.SECRET, '1hr')
+      };
     },
 
-    signupUser: async(
-      root,
-      { username, email, password},
-      { User }
+    signupUser: async (
+      root, {
+        username,
+        email,
+        password
+      }, {
+        User
+      }
     ) => {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({
+        username
+      });
       if (user) {
         throw new Error('User already exists;')
       }
@@ -70,7 +118,9 @@ exports.resolvers = {
         email,
         password
       }).save();
-      return { token: createToken(newUser, process.env.SECRET, '1hr')};
+      return {
+        token: createToken(newUser, process.env.SECRET, '1hr')
+      };
     }
   }
 };
