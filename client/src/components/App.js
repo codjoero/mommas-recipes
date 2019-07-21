@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Query } from 'react-apollo';
 import { GET_ALL_RECIPES } from '../queries'
+import RecipeItem from './Recipe/RecipeItem';
 
 export const App = () => (
   <div className="App">
@@ -11,9 +12,13 @@ export const App = () => (
         if (loading) return <div>Loading</div>
         if (error) return <div>Error</div>
 
-        console.log(data);
+        // console.log(data);
         return (
-          <p>Recipes</p>
+          <ul>
+            {data.getAllRecipes.map(recipe => (
+              <RecipeItem key={recipe._id} {...recipe} />
+            ))}
+          </ul>
         )
       }}
     </Query>
