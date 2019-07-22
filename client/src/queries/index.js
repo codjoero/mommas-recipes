@@ -71,6 +71,20 @@ export const GET_CURRENT_USER = gql`
       username
       joinDate
       email
+      favourites {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+export const GET_USER_RECIPES = gql`
+  query($username: String!) {
+    getUserRecipes(username: $username) {
+      _id
+      name
+      likes
     }
   }
 `;
