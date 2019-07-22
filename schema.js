@@ -27,8 +27,10 @@ type Token {
 type Query {
   getAllRecipes: [Recipe]
   getRecipe(_id: ID!): Recipe
-  getCurrentUser: User
   searchRecipes(searchTerm: String): [Recipe]
+
+  getCurrentUser: User
+  getUserRecipes(username: String!): [Recipe]
 }
 
 type Mutation {
