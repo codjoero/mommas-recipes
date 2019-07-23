@@ -39,6 +39,8 @@ type Mutation {
     instructions: String!, username: String
   ): Recipe
 
+  deleteUserRecipe(_id: ID!): Recipe
+
   signinUser(
     username: String!, password: String!
   ): Token

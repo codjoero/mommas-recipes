@@ -43,3 +43,8 @@ nav ul {
 .active {
   font-weight: bold;
 }
+
+.delete-button {
+  color: red;
+  cursor: pointer;
+}
