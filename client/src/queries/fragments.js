@@ -5,7 +5,10 @@ export const recipeFragments = {
     fragment CompleteRecipe on Recipe {
       _id
       name
+<<<<<<< HEAD
       imageUrl
+=======
+>>>>>>> Preparation for deployment
       category
       description
       instructions
