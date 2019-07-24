@@ -1,0 +1,50 @@
+.App {
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+input,
+select,
+textarea {
+  padding: 0.4em 0.2em;
+  font-size: 1.5rem;
+}
+
+p,
+li {
+  font-size: 2rem;
+}
+
+ul {
+  list-style: none;
+}
+
+nav {
+  text-align: center;
+  padding-bottom: 0.2em;
+  padding-top: 2em;
+  background-color: #efefef;
+  box-shadow: -3px 3px 10px 0px rgba(168, 168, 168, 0.7);
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.delete-button {
+  color: red;
+  cursor: pointer;
+}
