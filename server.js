@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 require('dotenv').config({ path: 'variables.env'});
@@ -8,7 +9,9 @@ const Recipe = require('./models/Recipe');
 const User = require('./models/User');
 
 // Brng in GraphQL-Express middleware
-const { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
+const {
+  graphiqlExpress, graphqlExpress
+} = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
 
 const { typeDefs } = require('./schema');
@@ -22,7 +25,9 @@ const schema = makeExecutableSchema({
 
 // Connects to database
 mongoose
-  .connect(process.env.MONGO_URI, { useFindAndModify: false, useCreateIndex: true })
+  .connect(process.env.MONGO_URI, {
+    useFindAndModify: false, useCreateIndex: true
+  })
   .then(() => console.log('DB connected'))
   .catch(err => console.log(err));
 
@@ -50,9 +55,9 @@ app.use(async (req, res, next) => {
 });
 
 // Create GraphiQL application
-app.use(
-  '/graphiql',
-  graphiqlExpress({ endpointURL: '/graphql'}));
+// app.use(
+//   '/graphiql',
+//   graphiqlExpress({ endpointURL: '/graphql'}));
 
 // Connect Schemas with GraphQL
 app.use(
@@ -67,6 +72,16 @@ app.use(
     }
   }))
 );
+
+if (process.env.NODE_ENV === 'production') {
+  app.user(express.static('client/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(
+      __dirname, 'client', 'build', 'index.html'
+    ));
+  })
+}
 
 const PORT = process.env.PORT || 4444;
 
