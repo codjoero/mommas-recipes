@@ -9,7 +9,7 @@ const formatDate = date => {
 
 const UserInfo = ({ session }) => {
   const {
-    username, email, joinDate, favourites
+    username, email, joinDate, favorites
   } = session.getCurrentUser;
   return (
     <div>
@@ -18,15 +18,15 @@ const UserInfo = ({ session }) => {
       <p>Email: {email}</p>
       <p>Join Date: {formatDate(joinDate)}</p>
       <ul>
-        <h3>{username}'s Favourites</h3>
-        {favourites.map(favourite => (
-          <li key={favourite._id}>
-            <Link to={`/recipes/${favourite._id}`}><p>{favourite.name}</p></Link>
+        <h3>{username}'s Favorites</h3>
+        {favorites.map(favorite => (
+          <li key={favorite._id}>
+            <Link to={`/recipes/${favorite._id}`}><p>{favorite.name}</p></Link>
           </li>
         ))}
-        {!favourites.length && (
+        {!favorites.length && (
         <p>
-          <strong>You have no favourites currently. Go add some!</strong>
+          <strong>You have no favorites currently. Go add some!</strong>
         </p>
         )}
       </ul>

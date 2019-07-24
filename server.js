@@ -22,7 +22,7 @@ const schema = makeExecutableSchema({
 
 // Connects to database
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, { useFindAndModify: false, useCreateIndex: true })
   .then(() => console.log('DB connected'))
   .catch(err => console.log(err));
 
