@@ -36,7 +36,6 @@ class AddRecipe extends Component {
     event.preventDefault();
     addRecipe()
     .then(({ data }) => {
-      console.log(data);
       this.clearState();
       this.props.history.push('/');
     });
