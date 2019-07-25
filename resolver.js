@@ -74,6 +74,7 @@ exports.resolvers = {
     addRecipe: async (
       root, {
         name,
+        imageUrl,
         description,
         category,
         instructions,
@@ -84,6 +85,7 @@ exports.resolvers = {
     ) => {
       const newRecipe = await new Recipe({
         name,
+        imageUrl,
         description,
         category,
         instructions,

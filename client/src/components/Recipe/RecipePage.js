@@ -9,19 +9,41 @@ const RecipePage = ({ match }) => {
 
   return (
     <Query query={GET_RECIPE} variables={{ _id }}>
-      {({ data, loading, error }) => {
+      {({ data : { getRecipe }, loading, error }) => {
         if (loading) return <div>Loading</div>
         if (error) return <div>Error</div>
 
         return (
           <div className='App'>
-            <h2>{data.getRecipe.name}</h2>
-            <p>Category: {data.getRecipe.category}</p>
-            <p>Descriptio: {data.getRecipe.description}</p>
-            <p>Instructions: {data.getRecipe.instructions}</p>
-            <p>Likes: {data.getRecipe.likes}</p>
-            <p>Created By: {data.getRecipe.username}</p>
-            <LikeRecipe _id={_id} />
+            <div
+              style={{ background: `url(${getRecipe.imageUrl}) center center / cover no-repeat`}}
+              className="recipe-image"
+            />
+            <div className='recipe'>
+              <div className='recipe-header'>
+                <h2 className='recipe-name'>
+                  <strong>{getRecipe.name}</strong>
+                </h2>
+                <h5>
+                  <strong>{getRecipe.category}</strong>
+                </h5>
+                <p>
+                  Created by <strong>{getRecipe.username}</strong>
+                </p>
+                <p>
+                  {getRecipe.likes} <span role="img" aria-label="heart">❤️</span>
+                </p>
+              </div>
+              <blockquote className="recipe-description">
+                {getRecipe.description}
+              </blockquote>
+              <h3 className="recipe-instructions__title">Instructions</h3>
+              <div
+                className="recipe-instruction"
+                dangerouslySetInnerHTML={{ __html: getRecipe.instructions }}
+              />
+              <LikeRecipe _id={_id} />
+            </div>
           </div>
         );
       }}

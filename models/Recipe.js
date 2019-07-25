@@ -6,6 +6,10 @@ const RecipeSchema = new Schema({
     type: String,
     require: true,
   },
+  imageUrl: {
+    type: String,
+    required: true
+  },
   category: {
     type: String,
     required: true
