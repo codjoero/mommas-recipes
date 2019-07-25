@@ -3,6 +3,7 @@ exports.typeDefs = `
 type Recipe {
   _id: ID
   name: String!
+  imageUrl: String!
   category: String!
   description: String!
   instructions: String!
@@ -35,7 +36,7 @@ type Query {
 
 type Mutation {
   addRecipe(
-    name: String!, description: String!, category: String!,
+    name: String!, imageUrl: String!, description: String!, category: String!,
     instructions: String!, username: String
   ): Recipe
 
