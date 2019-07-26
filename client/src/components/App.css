@@ -233,3 +233,21 @@ nav ul {
   background-color: #f15f79;
   color: white !important;
 }
+
+/* Search */
+
+.spinner {
+  text-align: center;
+  padding: 5em;
+}
+
+.search {
+  font-size: 2rem;
+  transition: width 0.2s ease-in;
+  margin: 2em;
+  width: 12em;
+}
+
+.search:focus {
+  width: 14em;
+}
