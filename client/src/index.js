@@ -17,7 +17,7 @@ import Profile from './components/Profile/Profile';
 import RecipePage from './components/Recipe/RecipePage';
 
 const client = new ApolloClient({
-  uri: 'http://mommas-recipes.herokuapp.com/graphql',
+  uri: 'https://mommas-recipes.herokuapp.com/graphql',
   fetchOptions: {
     credentials: 'include'
   },
@@ -31,7 +31,7 @@ const client = new ApolloClient({
   },
   onError: ({ networkError }) => {
     if (networkError) {
-      console.log('Network Error', networkError);
+      localStorage.setItem('token', '');
     }
   }
 });
