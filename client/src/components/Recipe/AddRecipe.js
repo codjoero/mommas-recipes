@@ -104,7 +104,7 @@ class AddRecipe extends Component {
                   <option value="Breakfast">Breakfast</option>
                   <option value="Lunch">Lunch</option>
                   <option value="Dinner">Dinner</option>
-                  <option value="snack">snack</option>
+                  <option value="Snack">Snack</option>
                 </select>
                 <input
                   type="text"
@@ -119,12 +119,6 @@ class AddRecipe extends Component {
                   content={instructions}
                   events={{ change: this.handleEditorChange }}
                 />
-                {/* <textarea
-                  name="instructions"
-                  placeholder="Add Instructions"
-                  onChange={this.handleChange}
-                  value={instructions}
-                /> */}
                 <button
                   type="submit"
                   disabled={loading || this.validateForm()}

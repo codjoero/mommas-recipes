@@ -37,9 +37,7 @@ class App extends React.Component {
           {({ data, loading, error }) => {
             if (loading) return <Spinner />
             if (error) return <div>Error</div>
-            // console.log(data);
             const { on } = this.state;
-            console.log(on);
             
             return (
               <RecipeList
